@@ -1,0 +1,7 @@
+{
+  "name": "AlbedoMaps: Cuiabá Heat Atlas",
+  "description": "Atlas Digital de Calor para a Baixada Cuiabana. Diagnóstico de risco térmico com dados Landsat e NASA POWER.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
