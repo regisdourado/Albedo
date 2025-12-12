@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Chat state
-  const [chatSession] = useState(() => createChatSession());
+  const [chatSession] = useState<any>(() => createChatSession());
 
   const handleNavigate = (section: Section) => {
     if (section === Section.CHAT) {
