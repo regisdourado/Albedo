@@ -12,6 +12,8 @@ export interface RegionRisk {
   temperature: number;
   vegetationCoverage: number; // Percentage
   recommendation: string;
+  populationDensity?: number; // hab/km²
+  totalPopulation?: number; // Estimated population
 }
 
 export enum Section {

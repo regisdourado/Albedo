@@ -1,10 +1,6 @@
 import { GoogleGenAI, Chat } from "@google/genai";
 
-const getClient = () => {
-  const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY;
-  if (!apiKey) return null;
-  return new GoogleGenAI({ apiKey });
-};
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const SYSTEM_INSTRUCTION = `
 Você é o assistente virtual especializado do "AlbedoMaps", um Atlas Digital de Calor focado na Baixada Cuiabana.
@@ -23,13 +19,7 @@ Diretrizes de Resposta:
 - Cite sempre a relação: Menos Vegetação (NDVI baixo) = Maior Calor (LST alto).
 `;
 
-export const createChatSession = (): Chat | null => {
-  const ai = getClient();
-  if (!ai) {
-    console.warn("Gemini API Key missing. Chat features disabled.");
-    return null;
-  }
-
+export const createChatSession = (): Chat => {
   return ai.chats.create({
     model: 'gemini-2.5-flash',
     config: {
@@ -39,10 +29,7 @@ export const createChatSession = (): Chat | null => {
   });
 };
 
-export const sendMessage = async (chat: Chat | null, message: string): Promise<string> => {
-  if (!chat) {
-    return "O chat está indisponível no momento (Chave API não configurada).";
-  }
+export const sendMessage = async (chat: Chat, message: string): Promise<string> => {
   try {
     const response = await chat.sendMessage({ message });
     return response.text || "Desculpe, não consegui processar a resposta.";
