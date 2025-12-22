@@ -20,6 +20,5 @@ export enum Section {
   HOME = 'home',
   DASHBOARD = 'dashboard',
   METHODOLOGY = 'methodology',
-  ABOUT = 'about',
-  CHAT = 'chat'
+  ABOUT = 'about'
 }
