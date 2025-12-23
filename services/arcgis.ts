@@ -16,7 +16,7 @@ export const fetchNasaHeatData = async (): Promise<RegionRisk[]> => {
     });
 
     const response = await fetch(`${ARCGIS_FEATURE_SERVICE}?${params.toString()}`);
-    
+
     if (!response.ok) {
       throw new Error(`Erro HTTP: ${response.status}`);
     }
@@ -31,7 +31,7 @@ export const fetchNasaHeatData = async (): Promise<RegionRisk[]> => {
     // Mapear os dados brutos do ArcGIS para o formato da nossa aplicação
     return data.features.map((feature: any, index: number) => {
       const attr = feature.attributes;
-      
+
       // Tentar encontrar campos comuns de temperatura nessas camadas
       // As campanhas variam, mas geralmente usam 'temp_f', 'temperature', 'heat_index'
       const tempF = attr.Temp_F || attr.Temperature || attr.Heat_Index || 95; // 95F fallback
@@ -58,6 +58,8 @@ export const fetchNasaHeatData = async (): Promise<RegionRisk[]> => {
         // Propriedades extras para o mapa visual
         x: `${randomX}%`,
         y: `${randomY}%`,
+        lat: feature.geometry?.y || (-15.6 + (Math.random() * 0.1 - 0.05)),
+        lng: feature.geometry?.x || (-56.1 + (Math.random() * 0.1 - 0.05)),
         isExternal: true // Flag para identificar origem
       };
     });

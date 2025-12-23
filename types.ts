@@ -14,6 +14,8 @@ export interface RegionRisk {
   recommendation: string;
   populationDensity?: number; // hab/km²
   totalPopulation?: number; // Estimated population
+  lat?: number;
+  lng?: number;
 }
 
 export enum Section {
