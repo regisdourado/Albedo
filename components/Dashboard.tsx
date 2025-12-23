@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, BarChart, Bar, Legend, Cell } from 'recharts';
 import { ThermalDataPoint, RegionRisk } from '../types';
 import { fetchNasaHeatData } from '../services/arcgis';
-import { AlertCircle, Thermometer, Map as MapIcon, BarChart3, Filter, Loader2, Navigation, MapPin, X, Download, Globe, Share2, Check, Users, Activity } from 'lucide-react';
+import { fetchHistoricalClimateData } from '../services/nasaPower';
+import { AlertCircle, Thermometer, Map as MapIcon, BarChart3, Filter, Loader2, Navigation, MapPin, X, Download, Globe, Share2, Check, Users, Activity, BarChart as ChartIcon } from 'lucide-react';
 
 const mockHistoricalData: ThermalDataPoint[] = [
   { month: 'Jan', avgTemp: 32, maxTemp: 36, ndvi: 0.6 },
@@ -58,6 +59,8 @@ const Dashboard: React.FC = () => {
   const [regionType, setRegionType] = useState<'city' | 'state'>('city');
   const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<VisualRegionRisk | null>(null);
+  const [historicalData, setHistoricalData] = useState<ThermalDataPoint[]>(mockHistoricalData);
+  const [isDataLoading, setIsDataLoading] = useState(false);
   const [activeRiskFilters, setActiveRiskFilters] = useState<string[]>(['Baixo', 'Médio', 'Alto', 'Crítico']);
   const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -182,6 +185,25 @@ const Dashboard: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Fetch real NASA POWER data when a region is selected
+  useEffect(() => {
+    const loadNasaData = async () => {
+      if (selectedRegion && selectedRegion.lat && selectedRegion.lng) {
+        setIsDataLoading(true);
+        const data = await fetchHistoricalClimateData(selectedRegion.lat, selectedRegion.lng);
+        if (data) {
+          setHistoricalData(data);
+        } else {
+          setHistoricalData(mockHistoricalData);
+        }
+        setIsDataLoading(false);
+      } else if (!selectedRegion) {
+        setHistoricalData(mockHistoricalData);
+      }
+    };
+    loadNasaData();
+  }, [selectedRegion]);
+
   const handleShare = () => {
     const url = new URL(window.location.origin + window.location.pathname);
     if (selectedRegion) url.searchParams.set('region', selectedRegion.id);
@@ -224,7 +246,7 @@ const Dashboard: React.FC = () => {
 
   const handleDownloadCSV = () => {
     const headers = ['Mês,Temperatura Média (°C),Temperatura Máxima (°C),NDVI'];
-    const rows = mockHistoricalData.map(row => `${row.month},${row.avgTemp},${row.maxTemp},${row.ndvi}`);
+    const rows = historicalData.map(row => `${row.month},${row.avgTemp},${row.maxTemp},${row.ndvi}`);
     const csvContent = [headers, ...rows].join('\n');
     const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -378,9 +400,23 @@ const Dashboard: React.FC = () => {
             <div className="bg-slate-800 p-6 rounded-xl border border-slate-700"><p className="text-slate-400 text-sm mb-1">Sincronização</p><h3 className="text-3xl font-bold text-green-500">L8/L9 NASA</h3></div>
           </div>
           <div className="grid lg:grid-cols-2 gap-8">
-            <div className="h-[450px] bg-slate-800 p-6 rounded-xl border border-slate-700">
-              <div className="flex justify-between items-start mb-8"><div><h3 className="text-xl font-semibold text-white">Ciclo Térmico Anual</h3><p className="text-xs text-slate-500 font-mono mt-1">Integração Landsat LST / NASA POWER</p></div><button onClick={handleDownloadCSV} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 transition-all"><Download size={18} /></button></div>
-              <div className="h-[320px] w-full"><ResponsiveContainer width="100%" height="100%"><AreaChart data={mockHistoricalData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} /><XAxis dataKey="month" stroke="#94a3b8" fontSize={12} /><YAxis stroke="#94a3b8" fontSize={12} tickFormatter={(v) => `${v}°C`} /><RechartsTooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b' }} /><Area type="monotone" dataKey="maxTemp" stroke="#ef4444" fill="#ef4444" fillOpacity={0.1} /></AreaChart></ResponsiveContainer></div>
+            <div className="h-[450px] bg-slate-800 p-6 rounded-xl border border-slate-700 relative overflow-hidden">
+              {isDataLoading && (
+                <div className="absolute inset-0 bg-slate-800/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center">
+                  <Loader2 className="animate-spin text-orange-500 mb-2" />
+                  <span className="text-xs font-mono text-slate-400">Consultando NASA POWER...</span>
+                </div>
+              )}
+              <div className="flex justify-between items-start mb-8">
+                <div>
+                  <h3 className="text-xl font-semibold text-white">Ciclo Térmico Anual</h3>
+                  <p className="text-xs text-slate-500 font-mono mt-1">
+                    {selectedRegion ? `Dados de Satélite para ${selectedRegion.name}` : 'Média Regional (NASA POWER API)'}
+                  </p>
+                </div>
+                <button onClick={handleDownloadCSV} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 transition-all"><Download size={18} /></button>
+              </div>
+              <div className="h-[320px] w-full"><ResponsiveContainer width="100%" height="100%"><AreaChart data={historicalData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} /><XAxis dataKey="month" stroke="#94a3b8" fontSize={12} /><YAxis stroke="#94a3b8" fontSize={12} tickFormatter={(v) => `${v}°C`} /><RechartsTooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b' }} /><Area type="monotone" dataKey="maxTemp" stroke="#ef4444" fill="#ef4444" fillOpacity={0.1} name="Temp. Máxima" /><Area type="monotone" dataKey="avgTemp" stroke="#eab308" fill="#eab308" fillOpacity={0.05} name="Temp. Média" /></AreaChart></ResponsiveContainer></div>
             </div>
             <div className="h-[450px] bg-slate-800 p-6 rounded-xl border border-slate-700">
               <div className="mb-8"><h3 className="text-xl font-semibold text-white">Ranking de Hotspots</h3><p className="text-xs text-slate-500 font-mono mt-1">Áreas priorizadas para Mitigação Térmica</p></div>
