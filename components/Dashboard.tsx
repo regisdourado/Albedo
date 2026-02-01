@@ -7,6 +7,10 @@ import { fetchNasaHeatData } from '../services/arcgis';
 import { fetchHistoricalClimateData } from '../services/nasaPower';
 import { AlertCircle, Thermometer, Map as MapIcon, BarChart3, Filter, Loader2, Navigation, MapPin, X, Download, Globe, Share2, Check, Users, Activity, BarChart as ChartIcon } from 'lucide-react';
 
+interface DashboardProps {
+  darkMode: boolean;
+}
+
 // Fix for default Leaflet marker icons when using build systems like Vite
 // @ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
@@ -64,7 +68,7 @@ const mockMTStateRegions: VisualRegionRisk[] = [
   { id: 'mt-9', name: 'Barra do Garças', riskLevel: 'Médio', temperature: 36.5, vegetationCoverage: 45, recommendation: 'Ecoturismo Sustentável', x: '85%', y: '70%', lat: -15.89, lng: -52.26, populationDensity: 60, totalPopulation: 65000 },
 ];
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<DashboardProps> = ({ darkMode }) => {
   const [activeTab, setActiveTab] = useState<'map' | 'analytics'>('map');
   const [riskRegions, setRiskRegions] = useState<VisualRegionRisk[]>(initialMockRiskRegions);
   const [regionType, setRegionType] = useState<'city' | 'state'>('city');

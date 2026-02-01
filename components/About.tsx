@@ -1,7 +1,11 @@
 import React from 'react';
 import { GraduationCap, Users, FileText, Scale, Award, Code2 } from 'lucide-react';
 
-const About: React.FC = () => {
+interface AboutProps {
+  darkMode: boolean;
+}
+
+const About: React.FC<AboutProps> = ({ darkMode }) => {
   const teamMembers = [
     "Luiz Carlos de Almeida",
     "Mario Marcos Morel",
