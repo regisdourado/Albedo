@@ -343,6 +343,8 @@ const Dashboard: React.FC = () => {
               <>
                 <button
                   onClick={(e) => { e.stopPropagation(); setIsFilterMenuOpen(!isFilterMenuOpen); }}
+                  title="Filtrar Níveis de Risco"
+                  aria-label="Filtrar Níveis de Risco"
                   className={`absolute top-4 right-4 z-[500] p-3 rounded-full border shadow-2xl transition-all hover:scale-110 active:scale-95 ${isFilterMenuOpen ? 'bg-orange-600 border-orange-400 text-white' : 'bg-slate-900/90 border-slate-700 text-slate-400 hover:text-white backdrop-blur-md'}`}
                 >
                   <Filter size={20} />
@@ -421,7 +423,14 @@ const Dashboard: React.FC = () => {
                     {selectedRegion ? `Dados de Satélite para ${selectedRegion.name}` : 'Média Regional (NASA POWER API)'}
                   </p>
                 </div>
-                <button onClick={handleDownloadCSV} className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 transition-all"><Download size={18} /></button>
+                <button
+                  onClick={handleDownloadCSV}
+                  title="Baixar dados em CSV"
+                  aria-label="Baixar dados em CSV"
+                  className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-slate-300 transition-all"
+                >
+                  <Download size={18} />
+                </button>
               </div>
               <div className="h-[320px] w-full"><ResponsiveContainer width="100%" height="100%"><AreaChart data={historicalData}><CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} /><XAxis dataKey="month" stroke="#94a3b8" fontSize={12} /><YAxis stroke="#94a3b8" fontSize={12} tickFormatter={(v) => `${v}°C`} /><RechartsTooltip contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b' }} /><Area type="monotone" dataKey="maxTemp" stroke="#ef4444" fill="#ef4444" fillOpacity={0.1} name="Temp. Máxima" /><Area type="monotone" dataKey="avgTemp" stroke="#eab308" fill="#eab308" fillOpacity={0.05} name="Temp. Média" /></AreaChart></ResponsiveContainer></div>
             </div>
