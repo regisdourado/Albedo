@@ -188,3 +188,5 @@ const Hero: React.FC<HeroProps> = ({ onNavigate, darkMode }) => {
     </div>
   );
 };
+
+export default Hero;

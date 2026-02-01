@@ -99,3 +99,5 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, darkMode, on
     </header>
   );
 };
+
+export default Header;
