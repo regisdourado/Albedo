@@ -5,52 +5,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AlbedoMaps - Atlas de Calor Cuiabá</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #0f172a;
-      /* Slate 900 */
-      color: #e2e8f0;
-      /* Slate 200 */
-    }
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="AlbedoMaps - Atlas de Calor Urbano de Cuiabá. Visualização de risco térmico, transparência climática e dados climatológicos em tempo real." />
+  <meta name="keywords"
+    content="Cuiabá, calor, albedo, clima, NASA, Landsat, sustentabilidade, atlas urbano, Mato Grosso" />
+  <meta name="author" content="AlbedoMaps Team" />
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://regisdourado.github.io/Albedo/" />
+  <meta property="og:title" content="AlbedoMaps - Atlas de Calor Cuiabá" />
+  <meta property="og:description"
+    content="Explore o mapa de risco térmico de Cuiabá com dados de satélite NASA e Landsat." />
+  <meta property="og:image" content="https://regisdourado.github.io/Albedo/og-image.jpg" />
 
-    ::-webkit-scrollbar-track {
-      background: #1e293b;
-    }
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://regisdourado.github.io/Albedo/" />
+  <meta property="twitter:title" content="AlbedoMaps - Atlas de Calor Cuiabá" />
+  <meta property="twitter:description"
+    content="Explore o mapa de risco térmico de Cuiabá com dados de satélite NASA e Landsat." />
+  <meta property="twitter:image" content="https://regisdourado.github.io/Albedo/og-image.jpg" />
 
-    ::-webkit-scrollbar-thumb {
-      background: #475569;
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #64748b;
-    }
-  </style>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.5.1",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2",
-    "vite": "https://aistudiocdn.com/vite@^7.2.7"
-  }
-}
-</script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>

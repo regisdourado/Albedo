@@ -1,9 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, BarChart, Bar, Legend, Cell } from 'recharts';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { ThermalDataPoint, RegionRisk } from '../types';
 import { fetchNasaHeatData } from '../services/arcgis';
 import { fetchHistoricalClimateData } from '../services/nasaPower';
 import { AlertCircle, Thermometer, Map as MapIcon, BarChart3, Filter, Loader2, Navigation, MapPin, X, Download, Globe, Share2, Check, Users, Activity, BarChart as ChartIcon } from 'lucide-react';
+
+// Fix for default Leaflet marker icons when using build systems like Vite
+// @ts-ignore
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
 
 const mockHistoricalData: ThermalDataPoint[] = [
   { month: 'Jan', avgTemp: 32, maxTemp: 36, ndvi: 0.6 },
@@ -77,9 +88,6 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     if (!mapContainerRef.current || leafletMapRef.current) return;
 
-    const L = (window as any).L;
-    if (!L) return;
-
     const map = L.map(mapContainerRef.current, {
       center: [-15.5960, -56.0969],
       zoom: 13,
@@ -125,7 +133,6 @@ const Dashboard: React.FC = () => {
   // Update Markers
   useEffect(() => {
     if (!leafletMapRef.current || !markersLayerRef.current) return;
-    const L = (window as any).L;
     const map = leafletMapRef.current;
     const layerGroup = markersLayerRef.current;
 
