@@ -242,9 +242,9 @@ const Dashboard: React.FC = () => {
         } else {
           alert("Nenhum dado encontrado na API da NASA.");
         }
-      } catch (error) {
-        console.error(error);
-        alert("Não foi possível carregar dados da API da NASA.");
+      } catch (error: any) {
+        console.error("Erro ao sincronizar com NASA/NOAA:", error);
+        alert(`Serviço de Dados Externos: ${error.message || "Não foi possível conectar com os servidores da NASA no momento. Verifique sua conexão ou tente novamente mais tarde."}`);
       } finally {
         setIsSyncing(false);
       }

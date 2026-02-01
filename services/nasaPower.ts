@@ -16,7 +16,16 @@ export interface NasaPowerResponse {
  */
 export const fetchHistoricalClimateData = async (lat: number, lng: number) => {
     try {
-        const endYear = new Date().getFullYear() - 1; // Dados consolidados do ano anterior
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1; // 1-12
+
+        // Se estivermos no início do ano, os dados do ano anterior ainda podem estar sendo consolidados
+        // A NASA POWER geralmente tem um delay de alguns meses para médias mensais terrestres
+        let endYear = currentYear - 1;
+        if (currentMonth < 3) {
+            endYear = currentYear - 2;
+        }
         const startYear = endYear;
 
         // T2M (Média), T2M_MAX (Máxima)
@@ -26,7 +35,10 @@ export const fetchHistoricalClimateData = async (lat: number, lng: number) => {
         const url = `https://power.larc.nasa.gov/api/temporal/monthly/point?parameters=${parameters}&community=${community}&longitude=${lng}&latitude=${lat}&format=JSON&start=${startYear}&end=${endYear}`;
 
         const response = await fetch(url);
-        if (!response.ok) throw new Error("Erro ao acessar NASA POWER API");
+        if (!response.ok) {
+            console.error(`NASA Power API call failed with status ${response.status}`);
+            throw new Error("Erro ao acessar NASA POWER API");
+        }
 
         const data: NasaPowerResponse = await response.json();
         const params = data.features[0].properties.parameter;

@@ -18,7 +18,8 @@ export const fetchNasaHeatData = async (): Promise<RegionRisk[]> => {
     const response = await fetch(`${ARCGIS_FEATURE_SERVICE}?${params.toString()}`);
 
     if (!response.ok) {
-      throw new Error(`Erro HTTP: ${response.status}`);
+      console.error(`ArcGIS API Error: ${response.status} ${response.statusText}`);
+      throw new Error(`Serviço NOAA/NASA indisponível (Status: ${response.status})`);
     }
 
     const data = await response.json();
