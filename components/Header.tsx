@@ -78,6 +78,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, darkMode, on
            <button
             onClick={onToggleDarkMode}
             className={`p-2 rounded-lg transition-all ${darkMode ? 'bg-slate-800 text-yellow-400 hover:bg-slate-700' : 'bg-gray-200 text-orange-600 hover:bg-gray-300'}`}
+            title={darkMode ? 'Ativar modo claro' : 'Ativar modo escuro'}
+            aria-label={darkMode ? 'Ativar modo claro' : 'Ativar modo escuro'}
            >
             {darkMode ? <Sun size={18} /> : <Moon size={18} />}
            </button>
@@ -86,6 +88,8 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate, darkMode, on
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
                 className={`p-2 rounded-lg transition-all ${activeSection === item.id ? 'bg-orange-600 text-white' : darkMode ? 'text-slate-400' : 'text-gray-600'}`}
+                title={item.label}
+                aria-label={item.label}
              >
                 <item.icon size={20} />
              </button>
