@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: './', // Crucial para o GitHub Pages (caminhos relativos)
+  base: '/Albedo/', // GitHub Pages subdiretório
   build: {
     outDir: 'dist',
   }
