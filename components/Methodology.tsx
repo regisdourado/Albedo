@@ -1,11 +1,7 @@
 import React from 'react';
 import { Database, Satellite, Cpu, FileCheck, ExternalLink } from 'lucide-react';
 
-interface MethodologyProps {
-  darkMode: boolean;
-}
-
-const Methodology: React.FC<MethodologyProps> = ({ darkMode }) => {
+const Methodology: React.FC = () => {
   const steps = [
     {
       icon: <Database size={32} />,
