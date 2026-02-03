@@ -9,7 +9,8 @@ const NASA_POWER_BASE_URL = "https://power.larc.nasa.gov/api/temporal/daily/poin
 export const fetchNasaPowerSurfaceTemp = async (): Promise<number> => {
   try {
     const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 2);
+    // Aumentamos o atraso para 4 dias para garantir que os dados processados estejam disponíveis
+    yesterday.setDate(yesterday.getDate() - 4);
     const dateStr = yesterday.toISOString().split('T')[0].replace(/-/g, '');
 
     const params = new URLSearchParams({
@@ -28,10 +29,17 @@ export const fetchNasaPowerSurfaceTemp = async (): Promise<number> => {
     const data = await response.json();
     const tempValue = data.properties.parameter.TS[dateStr];
     
+    // CORREÇÃO: NASA retorna -999 para dados ausentes. 
+    // Se o valor for fisicamente impossível para Cuiabá (abaixo de -100), usamos o fallback.
+    if (tempValue < -100 || tempValue === undefined) {
+      console.warn("NASA POWER retornou valor nulo (-999). Usando fallback de Cuiabá.");
+      return 38.5;
+    }
+    
     return Math.round(tempValue * 10) / 10;
   } catch (error) {
     console.error("Erro ao buscar dados NASA POWER:", error);
-    return 38.5;
+    return 38.5; // Fallback de segurança (Média histórica quente)
   }
 };
 
