@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map as MapIcon, Layers, Leaf } from 'lucide-react';
+import { Map as MapIcon, Layers, Leaf, ThermometerSun } from 'lucide-react';
 import { Section } from '../types';
 
 interface HeroProps {
@@ -25,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           {/* Text Content */}
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             
-            {/* Institutional Header Block (Logo acima da página do Albedo) */}
+            {/* Institutional Header Block */}
             <div className="flex items-center gap-4 mb-2 opacity-90 hover:opacity-100 transition-opacity">
                <a 
                  href="https://setec.ufmt.br/ava/bct-ead/login/index.php" 
@@ -139,49 +139,52 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                         <div className="h-2 w-16 bg-slate-700 rounded"></div>
                       </div>
                       <div className="bg-slate-900 border border-slate-800 p-3 rounded-lg">
-                        <div className="h-1 w-8 bg-green-500 rounded mb-2"></div>
+                        <div className="h-1 w-8 bg-purple-500 rounded mb-2"></div>
                         <div className="h-2 w-16 bg-slate-700 rounded"></div>
                       </div>
                    </div>
 
-                   {/* Map Area */}
-                   <div className="flex-1 bg-slate-900 rounded-lg border border-slate-800 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg')] bg-cover opacity-5 grayscale invert"></div>
-                      
-                      {/* Heatmap Simulation */}
-                      <div className="absolute top-1/4 left-1/3 w-32 h-32 bg-red-600 rounded-full blur-[50px] opacity-60 mix-blend-screen animate-pulse"></div>
-                      <div className="absolute bottom-1/3 right-1/4 w-48 h-48 bg-orange-600 rounded-full blur-[60px] opacity-40 mix-blend-screen"></div>
+                   {/* Main Map Simulation */}
+                   <div className="flex-1 bg-slate-900 border border-slate-800 rounded-xl relative overflow-hidden">
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.1),transparent_70%)]"></div>
+                      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-orange-500 rounded-full animate-ping opacity-50"></div>
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-orange-500 rounded-full shadow-[0_0_15px_rgba(249,115,22,1)]"></div>
+                   </div>
 
-                      {/* Floating UI Elements on Map */}
-                      <div className="absolute top-8 left-8 bg-slate-900/90 backdrop-blur p-3 rounded-lg border border-slate-700 shadow-xl w-48">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-xs text-slate-400 font-mono">Split-Window LST</span>
-                            <span className="text-red-400 text-xs font-bold">LIVE</span>
-                          </div>
-                          <div className="text-2xl font-bold text-white">43.2°C</div>
-                          <div className="w-full bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                            <div className="bg-gradient-to-r from-orange-500 to-red-600 w-[85%] h-full"></div>
-                          </div>
-                      </div>
-
-                      <div className="absolute bottom-8 right-8 bg-slate-900/90 backdrop-blur p-3 rounded-lg border border-slate-700 shadow-xl flex items-center gap-3">
-                         <div className="bg-green-500/20 p-2 rounded-md text-green-400">
-                           <Leaf size={16} />
-                         </div>
-                         <div>
-                           <div className="text-[10px] text-slate-400">Recomendação</div>
-                           <div className="text-xs font-semibold text-slate-200">Reflorestamento: Alto</div>
-                         </div>
-                      </div>
+                   {/* Bottom Progress */}
+                   <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                      <div className="h-full w-[65%] bg-gradient-to-r from-orange-500 to-purple-600"></div>
                    </div>
                 </div>
+              </div>
 
-                {/* Reflection Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
+              {/* Decorative Elements around main card */}
+              <div className="absolute -top-10 -right-10 bg-slate-900/80 backdrop-blur-md border border-slate-700 p-4 rounded-2xl shadow-xl animate-bounce duration-[3000ms] hidden xl:block">
+                 <div className="flex items-center gap-3">
+                    <div className="p-2 bg-green-500/20 rounded-lg">
+                       <Leaf className="w-5 h-5 text-green-400" />
+                    </div>
+                    <div>
+                       <div className="text-[10px] text-slate-500 font-bold uppercase">NDVI Index</div>
+                       <div className="text-sm font-black text-white">+24% Vegetation</div>
+                    </div>
+                 </div>
+              </div>
+
+              <div className="absolute -bottom-6 -left-10 bg-slate-900/80 backdrop-blur-md border border-slate-700 p-4 rounded-2xl shadow-xl animate-pulse hidden xl:block">
+                 <div className="flex items-center gap-3">
+                    <div className="p-2 bg-orange-500/20 rounded-lg">
+                       <ThermometerSun className="w-5 h-5 text-orange-400" />
+                    </div>
+                    <div>
+                       <div className="text-[10px] text-slate-500 font-bold uppercase">LST Sensor</div>
+                       <div className="text-sm font-black text-white">41.2°C Detected</div>
+                    </div>
+                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
