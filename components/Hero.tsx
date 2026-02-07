@@ -3,6 +3,7 @@ import { ArrowRight, TrendingUp, Globe, Zap, Leaf, Cloud, MapPin } from 'lucide-
 import { Section } from '../types';
 import Features from './Features';
 import StatsSection from './StatsSection';
+import AgroSection from './AgroSection';
 import CTASection from './CTASection';
 import UFMTLogo from './common/UFMTLogo';
 
@@ -184,6 +185,9 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
       {/* Stats Section */}
       <StatsSection />
+
+      {/* Agronegócio Section */}
+      <AgroSection />
 
       {/* CTA Section */}
       <CTASection onNavigate={onNavigate} />
