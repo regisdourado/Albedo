@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map as MapIcon, Layers, Leaf, ThermometerSun } from 'lucide-react';
+import { ArrowRight, TrendingUp, Globe, Zap, Leaf, Cloud, MapPin } from 'lucide-react';
 import { Section } from '../types';
 import UFMTLogo from './common/UFMTLogo';
 
@@ -9,163 +9,167 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   return (
-    <div className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-slate-900 pt-20">
-      {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-          {/* Gradients */}
-          <div className="absolute -top-[20%] -right-[10%] w-[800px] h-[800px] bg-orange-600/10 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute -bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px]" />
+    <div className="pt-20 bg-gradient-to-b from-slate-50 via-white to-blue-50">
+      
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           
-          {/* Technical Grid Pattern */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)]"></div>
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          
-          {/* Text Content */}
-          <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          {/* Left Content */}
+          <div className="space-y-8">
             
-            {/* Institutional Header Block */}
-            <UFMTLogo variant="hero" />
-
-            <div className="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 backdrop-blur-md shadow-lg">
-              <span className="relative flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-              <span className="text-slate-300 text-xs font-semibold tracking-wide uppercase">Planejamento Urbano Sustentável</span>
+            {/* Breadcrumb Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              <span className="text-sm font-semibold text-blue-600">Monitoramento Ambiental em Tempo Real</span>
             </div>
-            
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-white">
-              Mapeamento de <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-purple-500">
-                Calor na Baixada Cuiabana
-              </span>
-            </h1>
-            
-            <p className="text-lg text-slate-400 max-w-xl leading-relaxed border-l-4 border-orange-500/50 pl-6">
-              A região enfrenta temperaturas acima de <strong>41°C</strong>.
-              Nosso Atlas Digital utiliza inteligência de satélite para transformar dados climáticos em 
-              <strong> estratégias de arborização urbana</strong>.
-            </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            {/* Main Heading */}
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+                Atlas de Calor da <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-blue-600">
+                  Baixada Cuiabana
+                </span>
+              </h1>
+              
+              <p className="text-xl text-gray-600 max-w-lg leading-relaxed">
+                Utilize dados geoespaciais de satélite para transformar conhecimento climático em decisões estratégicas para agronegócio, planejamento urbano e gestão ambiental.
+              </p>
+            </div>
+
+            {/* Key Metrics */}
+            <div className="grid grid-cols-3 gap-4 py-6 border-t border-b border-gray-200">
+              <div>
+                <div className="text-3xl font-bold text-blue-600">41°C</div>
+                <div className="text-sm text-gray-600 mt-1">Temperatura Máxima</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-green-600">2000+</div>
+                <div className="text-sm text-gray-600 mt-1">Pontos de Dados</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-orange-600">L8/L9</div>
+                <div className="text-sm text-gray-600 mt-1">Satélites Landsat</div>
+              </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={() => onNavigate(Section.DASHBOARD)}
-                className="group relative px-8 py-4 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-bold transition-all shadow-[0_0_40px_-10px_rgba(234,88,12,0.5)] hover:shadow-[0_0_60px_-15px_rgba(234,88,12,0.6)] flex items-center justify-center space-x-3 overflow-hidden"
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl"
               >
-                <MapIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>Acessar Mapa de Risco</span>
-                <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-10"></div>
+                <Globe size={20} />
+                Explorar Mapa Interativo
+                <ArrowRight size={20} />
               </button>
               
               <button 
-                onClick={() => onNavigate(Section.METHODOLOGY)}
-                className="px-8 py-4 bg-slate-800/40 hover:bg-slate-700/60 text-slate-300 hover:text-white rounded-xl font-semibold transition-all border border-slate-700 hover:border-slate-500 backdrop-blur-md flex items-center justify-center space-x-3"
+                onClick={() => onNavigate(Section.SOCIO_ENVIRONMENTAL)}
+                className="flex items-center justify-center gap-3 px-8 py-4 bg-white text-gray-700 rounded-lg font-semibold border border-gray-300 hover:bg-gray-50 transition-all"
               >
-                <Layers className="w-5 h-5" />
-                <span>Metodologia</span>
+                <Leaf size={20} />
+                Impacto Ambiental
               </button>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-8 border-t border-slate-800/50 pt-8 mt-8">
-              <div>
-                <div className="text-3xl font-bold text-white font-mono">L8/L9</div>
-                <div className="text-xs text-slate-500 mt-1 uppercase tracking-wider">Satélites Landsat</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-white font-mono">MVP</div>
-                <div className="text-xs text-slate-500 mt-1 uppercase tracking-wider">Produto Viável</div>
-              </div>
-              <div>
-                <div className="text-3xl font-bold text-white font-mono">NASA</div>
-                <div className="text-xs text-slate-500 mt-1 uppercase tracking-wider">Power API</div>
-              </div>
             </div>
           </div>
 
-          {/* Right Content - 3D Interface Preview */}
-          <div className="relative hidden lg:block group perspective-[2000px]">
-            <div className="relative transform transition-all duration-700 ease-out preserve-3d group-hover:rotate-x-2 group-hover:rotate-y-2 rotate-x-6 -rotate-y-6">
-              
-              {/* Back Glow */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-orange-500 to-purple-600 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+          {/* Right Content - Visual */}
+          <div className="relative hidden lg:block">
+            <div className="relative">
+              {/* Background Glow */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-green-300/20 to-blue-300/20 rounded-3xl blur-3xl"></div>
               
               {/* Main Card */}
-              <div className="relative bg-slate-900 border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl">
-                {/* Browser-like Header */}
-                <div className="h-12 bg-slate-800/50 border-b border-slate-700/50 flex items-center px-4 space-x-4">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+              <div className="relative bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden">
+                
+                {/* Header */}
+                <div className="h-16 bg-gradient-to-r from-blue-600 to-green-600 px-6 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <MapPin size={20} className="text-white" />
+                    <span className="text-white font-semibold">Mapa de Calor Urbano</span>
                   </div>
-                  <div className="flex-1 bg-slate-900/50 h-6 rounded-md border border-slate-700/30 flex items-center px-3 text-[10px] text-slate-500 font-mono">
-                    albedomaps.app/dashboard/heat-risk
-                  </div>
+                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm border border-white/30"></div>
                 </div>
 
-                {/* Dashboard Preview Content */}
-                <div className="relative h-[500px] w-full bg-slate-950 p-6 flex flex-col gap-4">
-                   
-                   {/* Top Stats Row Simulation */}
-                   <div className="grid grid-cols-3 gap-4">
-                      <div className="bg-slate-900 border border-slate-800 p-3 rounded-lg">
-                        <div className="h-1 w-8 bg-orange-500 rounded mb-2"></div>
-                        <div className="h-2 w-16 bg-slate-700 rounded"></div>
-                      </div>
-                      <div className="bg-slate-900 border border-slate-800 p-3 rounded-lg">
-                        <div className="h-1 w-8 bg-red-500 rounded mb-2"></div>
-                        <div className="h-2 w-16 bg-slate-700 rounded"></div>
-                      </div>
-                      <div className="bg-slate-900 border border-slate-800 p-3 rounded-lg">
-                        <div className="h-1 w-8 bg-purple-500 rounded mb-2"></div>
-                        <div className="h-2 w-16 bg-slate-700 rounded"></div>
-                      </div>
-                   </div>
+                {/* Content */}
+                <div className="p-6 space-y-4">
+                  
+                  {/* Map Preview */}
+                  <div className="h-64 rounded-xl bg-gradient-to-br from-blue-100 via-white to-green-100 border border-gray-200 relative overflow-hidden">
+                    {/* Grid */}
+                    <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+                      <defs>
+                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                          <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5"/>
+                        </pattern>
+                      </defs>
+                      <rect width="100" height="100" fill="url(#grid)" />
+                    </svg>
+                    
+                    {/* Heat Points */}
+                    <div className="absolute top-1/3 left-1/4 w-12 h-12 bg-red-500 rounded-full blur-xl opacity-40"></div>
+                    <div className="absolute top-1/2 right-1/4 w-8 h-8 bg-orange-400 rounded-full blur-lg opacity-50"></div>
+                    <div className="absolute bottom-1/4 left-1/3 w-10 h-10 bg-yellow-300 rounded-full blur-lg opacity-40"></div>
+                    
+                    {/* Marker */}
+                    <div className="absolute top-40 left-32">
+                      <div className="w-3 h-3 bg-blue-600 rounded-full shadow-lg animated-ping"></div>
+                    </div>
+                  </div>
 
-                   {/* Main Map Simulation */}
-                   <div className="flex-1 bg-slate-900 border border-slate-800 rounded-xl relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.1),transparent_70%)]"></div>
-                      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:20px_20px]"></div>
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-orange-500 rounded-full animate-ping opacity-50"></div>
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-orange-500 rounded-full shadow-[0_0_15px_rgba(249,115,22,1)]"></div>
-                   </div>
-
-                   {/* Bottom Progress */}
-                   <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                      <div className="h-full w-[65%] bg-gradient-to-r from-orange-500 to-purple-600"></div>
-                   </div>
+                  {/* Stats Row */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                      <div className="flex items-center gap-2 mb-2">
+                        <TrendingUp size={16} className="text-blue-600" />
+                        <span className="text-xs font-semibold text-gray-600">LST Index</span>
+                      </div>
+                      <div className="text-2xl font-bold text-blue-600">+34%</div>
+                    </div>
+                    <div className="bg-green-50 rounded-lg p-4 border border-green-100">
+                      <div className="flex items-center gap-2 mb-2">
+                        <Cloud size={16} className="text-green-600" />
+                        <span className="text-xs font-semibold text-gray-600">Cobertura Vegetal</span>
+                      </div>
+                      <div className="text-2xl font-bold text-green-600">+24%</div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              {/* Decorative Elements around main card */}
-              <div className="absolute -top-10 -right-10 bg-slate-900/80 backdrop-blur-md border border-slate-700 p-4 rounded-2xl shadow-xl animate-bounce duration-[3000ms] hidden xl:block">
-                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-green-500/20 rounded-lg">
-                       <Leaf className="w-5 h-5 text-green-400" />
-                    </div>
-                    <div>
-                       <div className="text-[10px] text-slate-500 font-bold uppercase">NDVI Index</div>
-                       <div className="text-sm font-black text-white">+24% Vegetation</div>
-                    </div>
-                 </div>
-              </div>
-
-              <div className="absolute -bottom-6 -left-10 bg-slate-900/80 backdrop-blur-md border border-slate-700 p-4 rounded-2xl shadow-xl animate-pulse hidden xl:block">
-                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-orange-500/20 rounded-lg">
-                       <ThermometerSun className="w-5 h-5 text-orange-400" />
-                    </div>
-                    <div>
-                       <div className="text-[10px] text-slate-500 font-bold uppercase">LST Sensor</div>
-                       <div className="text-sm font-black text-white">41.2°C Detected</div>
-                    </div>
-                 </div>
               </div>
             </div>
+
+            {/* Floating Cards */}
+            <div className="absolute -top-6 -right-6 bg-white border border-gray-200 rounded-xl shadow-lg p-4 w-56 animate-bounce">
+              <div className="flex items-center gap-3 mb-2">
+                <Zap size={20} className="text-yellow-500" />
+                <span className="font-semibold text-gray-900">Análise em Tempo Real</span>
+              </div>
+              <p className="text-sm text-gray-600">Dados atualizados a cada 16 dias</p>
+            </div>
+
+            <div className="absolute -bottom-6 -left-6 bg-white border border-gray-200 rounded-xl shadow-lg p-4 w-56">
+              <div className="flex items-center gap-3 mb-2">
+                <Leaf size={20} className="text-green-600" />
+                <span className="font-semibold text-gray-900">Sustentabilidade</span>
+              </div>
+              <p className="text-sm text-gray-600">Soluções baseadas em natureza</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Trust Section */}
+      <div className="border-t border-gray-200 bg-white">
+        <div className="container mx-auto px-4 py-12">
+          <p className="text-center text-sm font-semibold text-gray-600 mb-8">CONFIADO POR INSTITUIÇÕES LÍDERES</p>
+          <div className="flex justify-center items-center gap-12 flex-wrap">
+            <UFMTLogo variant="trust" />
+            <div className="text-gray-400">+</div>
+            <div className="text-gray-900 font-bold">NASA POWER API</div>
+            <div className="text-gray-400">+</div>
+            <div className="text-gray-900 font-bold">LANDSAT 8/9</div>
           </div>
         </div>
       </div>

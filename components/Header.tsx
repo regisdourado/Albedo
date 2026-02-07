@@ -1,5 +1,5 @@
-import React from 'react';
-import { Map, BarChart3, BookOpen, ThermometerSun, Users, HeartHandshake, Rocket } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { Section } from '../types';
 import UFMTLogo from './common/UFMTLogo';
 
@@ -9,64 +9,128 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+
   const navItems = [
-    { id: Section.HOME, label: 'Visão Geral', icon: Map },
-    { id: Section.DASHBOARD, label: 'Mapa de Risco', icon: BarChart3 },
-    { id: Section.METHODOLOGY, label: 'Metodologia', icon: BookOpen },
-    { id: Section.SOCIO_ENVIRONMENTAL, label: 'Socioambiental', icon: HeartHandshake },
-    { id: Section.STRATEGIC_PLAN, label: 'Parcerias', icon: Rocket },
-    { id: Section.ABOUT, label: 'Equipe', icon: Users },
+    { 
+      id: Section.HOME, 
+      label: 'Início', 
+      submenu: [
+        { id: 'overview', label: 'Visão Geral' },
+        { id: 'features', label: 'Recursos' },
+      ]
+    },
+    { 
+      id: Section.DASHBOARD, 
+      label: 'Mapa de Calor', 
+      submenu: [
+        { id: 'interactive', label: 'Mapa Interativo' },
+        { id: 'analysis', label: 'Análise Térmica' },
+      ]
+    },
+    { 
+      id: Section.SOCIO_ENVIRONMENTAL, 
+      label: 'Impacto Ambiental', 
+      submenu: [
+        { id: 'climate', label: 'Clima & Biodiversidade' },
+        { id: 'health', label: 'Saúde Pública' },
+      ]
+    },
+    { 
+      id: Section.STRATEGIC_PLAN, 
+      label: 'Agronegócio', 
+      submenu: [
+        { id: 'agriculture', label: 'Produtividade Agrícola' },
+        { id: 'sustainable', label: 'Práticas Sustentáveis' },
+      ]
+    },
+    { 
+      id: Section.METHODOLOGY, 
+      label: 'Metodologia' 
+    },
+    { 
+      id: Section.ABOUT, 
+      label: 'Sobre' 
+    },
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 transition-all duration-300">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-4">
+    <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          
+          {/* Logo */}
+          <div onClick={() => onNavigate(Section.HOME)} className="cursor-pointer">
             <UFMTLogo variant="header" />
-            <div className="h-8 w-px bg-slate-700 hidden sm:block"></div>
-            <div 
-              className="flex items-center space-x-2 cursor-pointer group" 
-              onClick={() => onNavigate(Section.HOME)}
-            >
-              <div className="bg-orange-500 p-1.5 rounded-lg group-hover:bg-orange-600 transition-colors">
-                < ThermometerSun className="text-white w-6 h-6" />
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <div key={item.id} className="group relative">
+                <button
+                  onClick={() => onNavigate(item.id)}
+                  className={`flex items-center gap-1 px-4 py-2 rounded-lg transition-all duration-300 ${
+                    activeSection === item.id
+                      ? 'text-blue-600 bg-blue-50 font-semibold'
+                      : 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
+                  }`}
+                >
+                  {item.label}
+                  {item.submenu && <ChevronDown size={16} />}
+                </button>
+                
+                {/* Dropdown Menu */}
+                {item.submenu && (
+                  <div className="absolute left-0 mt-0 w-48 bg-white border border-gray-100 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2">
+                    {item.submenu.map((sub) => (
+                      <button
+                        key={sub.id}
+                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                      >
+                        {sub.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-orange-400 to-red-600 bg-clip-text text-transparent hidden sm:block">
-                AlbedoMaps
-              </span>
-            </div>
+            ))}
+          </nav>
+
+          {/* Call to Action */}
+          <div className="hidden lg:flex items-center gap-4">
+            <button className="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors">
+              Explorar Dados
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
+            <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 text-gray-700">
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
-        <nav className="hidden md:flex space-x-1">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => onNavigate(item.id)}
-              className={`flex items-center space-x-2 px-3 lg:px-4 py-2 rounded-full transition-all text-sm font-medium ${
-                activeSection === item.id
-                  ? 'bg-orange-500/10 text-orange-500 border border-orange-500/20'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
-              }`}
-            >
-              <item.icon size={16} />
-              <span className="hidden lg:inline">{item.label}</span>
-              <span className="lg:hidden">{item.label.split(' ')[0]}</span>
-            </button>
-          ))}
-        </nav>
-        
-        <div className="md:hidden flex gap-2">
-           {navItems.map(item => (
-             <button 
-                key={item.id}
-                onClick={() => onNavigate(item.id)}
-                title={item.label}
-                className={`p-2 rounded-lg ${activeSection === item.id ? 'bg-orange-600 text-white' : 'text-slate-400'}`}
-             >
-                <item.icon size={20} />
-             </button>
-           ))}
-        </div>
+        {/* Mobile Navigation */}
+        {mobileOpen && (
+          <div className="lg:hidden pb-4 space-y-2">
+            {navItems.map((item) => (
+              <div key={item.id}>
+                <button
+                  onClick={() => {
+                    onNavigate(item.id);
+                    setMobileOpen(false);
+                  }}
+                  className="w-full text-left px-4 py-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                >
+                  {item.label}
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </header>
   );
