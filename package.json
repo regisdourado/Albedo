@@ -1,17 +1,36 @@
 {
   "name": "albedomaps-cuiaba",
-  "private": true,
   "version": "1.0.0",
+  "description": "Atlas Digital de Calor para a Baixada Cuiabana. Diagnóstico de risco térmico com dados Landsat e NASA POWER.",
   "type": "module",
+  "author": "Regis Dourado",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/regisdourado/Albedo.git"
+  },
+  "keywords": [
+    "heat-mapping",
+    "urban-planning",
+    "climate",
+    "landsat",
+    "nasa-power",
+    "ndvi",
+    "thermal-analysis",
+    "cuiaba",
+    "brazil",
+    "sustainability"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && echo 'Build completed. Push to main branch to deploy to GitHub Pages.'"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@google/genai": "^0.1.0",
+    "@google/genai": "^1.40.0",
     "lucide-react": "^0.300.0",
     "recharts": "^2.10.0"
   },
