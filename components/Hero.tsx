@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map as MapIcon, Layers, Leaf, ThermometerSun } from 'lucide-react';
 import { Section } from '../types';
+import UFMTLogo from './common/UFMTLogo';
 
 interface HeroProps {
   onNavigate: (section: Section) => void;
@@ -26,26 +27,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <div className="space-y-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
             
             {/* Institutional Header Block */}
-            <div className="flex items-center gap-4 mb-2 opacity-90 hover:opacity-100 transition-opacity">
-               <a 
-                 href="https://setec.ufmt.br/ava/bct-ead/login/index.php" 
-                 target="_blank" 
-                 rel="noopener noreferrer"
-                 className="bg-slate-100 p-2 rounded-lg hover:scale-105 transition-transform shadow-lg border border-slate-700"
-                 title="Acessar AVA UFMT BCT"
-               >
-                 <img 
-                   src="https://setec.ufmt.br/ava/bct-ead/pluginfile.php/1/theme_moove/logo/1769526764/logo-masters%20%281%29.png" 
-                   alt="UFMT BCT Logo Masters" 
-                   className="h-12 w-auto"
-                 />
-               </a>
-               <div className="h-10 w-px bg-slate-700"></div>
-               <div className="text-left">
-                  <div className="text-slate-300 text-xs font-bold uppercase tracking-widest">Universidade Federal de Mato Grosso</div>
-                  <div className="text-slate-500 text-[10px] font-mono">BCT - Ciência e Tecnologia (EAD)</div>
-               </div>
-            </div>
+            <UFMTLogo variant="hero" />
 
             <div className="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 backdrop-blur-md shadow-lg">
               <span className="relative flex h-3 w-3">

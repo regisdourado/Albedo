@@ -1,5 +1,6 @@
 import React from 'react';
 import { GraduationCap, Users, FileText, Scale, Award, Code2 } from 'lucide-react';
+import InfoCard from './common/InfoCard';
 
 const About: React.FC = () => {
   const teamMembers = [
@@ -56,38 +57,41 @@ const About: React.FC = () => {
 
           {/* Project Details */}
           <div className="space-y-6">
-             <div className="bg-slate-900/80 rounded-xl p-6 border border-slate-700">
-                <div className="flex items-center gap-3 mb-4 text-blue-400">
-                   <FileText size={20} />
-                   <h3 className="font-bold">Resumo do Projeto</h3>
-                </div>
-                <p className="text-slate-400 text-sm leading-relaxed">
-                  Desenvolvimento de plataforma web de inteligência geográfica para diagnóstico das Ilhas de Calor Urbanas na Baixada Cuiabana. Utiliza séries históricas de imagens de satélite (Landsat 8/9) e dados climatológicos (NASA POWER) para subsidiar o cumprimento da legislação municipal e diretrizes de conforto térmico.
-                </p>
-             </div>
+             <InfoCard
+               icon={<FileText size={20} />}
+               title="Resumo do Projeto"
+               iconColor="text-blue-400"
+               content={
+                 <p>
+                   Desenvolvimento de plataforma web de inteligência geográfica para diagnóstico das Ilhas de Calor Urbanas na Baixada Cuiabana. Utiliza séries históricas de imagens de satélite (Landsat 8/9) e dados climatológicos (NASA POWER) para subsidiar o cumprimento da legislação municipal e diretrizes de conforto térmico.
+                 </p>
+               }
+             />
 
-             <div className="bg-slate-900/80 rounded-xl p-6 border border-slate-700">
-                <div className="flex items-center gap-3 mb-4 text-purple-400">
-                   <Code2 size={20} />
-                   <h3 className="font-bold">Licenciamento</h3>
-                </div>
-                <p className="text-slate-400 text-sm">
-                  GNU General Public License v3.0 (GPL) - Software Livre de utilidade pública.
-                </p>
-             </div>
+             <InfoCard
+               icon={<Code2 size={20} />}
+               title="Licenciamento"
+               iconColor="text-purple-400"
+               content={
+                 <p>
+                   GNU General Public License v3.0 (GPL) - Software Livre de utilidade pública.
+                 </p>
+               }
+             />
 
-             <div className="bg-slate-900/80 rounded-xl p-6 border border-slate-700">
-                <div className="flex items-center gap-3 mb-4 text-green-400">
-                   <Scale size={20} />
-                   <h3 className="font-bold">Áreas Temáticas</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">TI & Ciência de Dados</span>
-                  <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">Física Térmica</span>
-                  <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">Geografia Urbana</span>
-                  <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">Ciência, Tecnologia e Sociedade</span>
-                </div>
-             </div>
+             <InfoCard
+               icon={<Scale size={20} />}
+               title="Áreas Temáticas"
+               iconColor="text-green-400"
+               content={
+                 <div className="flex flex-wrap gap-2">
+                   <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">TI & Ciência de Dados</span>
+                   <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">Física Térmica</span>
+                   <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">Geografia Urbana</span>
+                   <span className="px-2 py-1 bg-slate-800 rounded text-xs text-slate-300 border border-slate-700">Ciência, Tecnologia e Sociedade</span>
+                 </div>
+               }
+             />
           </div>
 
         </div>

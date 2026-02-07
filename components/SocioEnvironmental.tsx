@@ -1,5 +1,7 @@
 import React from 'react';
 import { HeartPulse, Sprout, ShieldAlert, Users2, CloudRain, Sun, Info } from 'lucide-react';
+import Badge from './common/Badge';
+import InfoCard from './common/InfoCard';
 
 const SocioEnvironmental: React.FC = () => {
   const themes = [
@@ -30,9 +32,9 @@ const SocioEnvironmental: React.FC = () => {
     <div className="container mx-auto px-4 py-24 space-y-16 max-w-6xl">
       {/* Header Section */}
       <div className="text-center space-y-4 animate-in fade-in duration-700">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-xs font-bold uppercase tracking-widest">
+        <Badge variant="orange">
            Contexto Socioambiental
-        </div>
+        </Badge>
         <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
           O Calor que <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-rose-500">não é Igual</span> para Todos
         </h2>
@@ -112,18 +114,27 @@ const SocioEnvironmental: React.FC = () => {
              </div>
              
              <div className="space-y-4">
-                <div className="group bg-slate-900 p-4 rounded-2xl border border-slate-700 hover:border-orange-500/50 transition-colors">
-                   <p className="text-sm font-bold text-slate-200 mb-1">Cegueira Térmica</p>
-                   <p className="text-xs text-slate-500">Ignorar as diferenças de temperatura entre bairros é ignorar a qualidade de vida do trabalhador.</p>
-                </div>
-                <div className="group bg-slate-900 p-4 rounded-2xl border border-slate-700 hover:border-green-500/50 transition-colors">
-                   <p className="text-sm font-bold text-slate-200 mb-1">Efeito Albedo</p>
-                   <p className="text-xs text-slate-500">Superfícies claras refletem calor. Em Cuiabá, precisamos repensar as cores de nossa infraestrutura urbana.</p>
-                </div>
-                <div className="group bg-slate-900 p-4 rounded-2xl border border-slate-700 hover:border-purple-500/50 transition-colors">
-                   <p className="text-sm font-bold text-slate-200 mb-1">Patrimônio Biocultural</p>
-                   <p className="text-xs text-slate-500">A arborização com espécies nativas (Cerrado/Pantanal) reconecta a cidade à sua identidade ecológica.</p>
-                </div>
+                <InfoCard
+                  icon={null}
+                  title="Cegueira Térmica"
+                  iconColor=""
+                  content="Ignorar as diferenças de temperatura entre bairros é ignorar a qualidade de vida do trabalhador."
+                  className="bg-slate-900 p-4 rounded-2xl border border-slate-700 hover:border-orange-500/50 transition-colors"
+                />
+                <InfoCard
+                  icon={null}
+                  title="Efeito Albedo"
+                  iconColor=""
+                  content="Superfícies claras refletem calor. Em Cuiabá, precisamos repensar as cores de nossa infraestrutura urbana."
+                  className="bg-slate-900 p-4 rounded-2xl border border-slate-700 hover:border-green-500/50 transition-colors"
+                />
+                <InfoCard
+                  icon={null}
+                  title="Patrimônio Biocultural"
+                  iconColor=""
+                  content="A arborização com espécies nativas (Cerrado/Pantanal) reconecta a cidade à sua identidade ecológica."
+                  className="bg-slate-900 p-4 rounded-2xl border border-slate-700 hover:border-purple-500/50 transition-colors"
+                />
              </div>
           </div>
         </div>

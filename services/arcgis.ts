@@ -1,5 +1,6 @@
 
 import { RegionRisk } from '../types';
+import { calculateRiskLevel, getRiskRecommendation } from '../utils/riskUtils';
 
 /**
  * CONFIGURAÇÕES DE VALIDAÇÃO TÉCNICA
@@ -89,17 +90,8 @@ export const fetchNasaHeatData = async (): Promise<RegionRisk[]> => {
     let vegetationCoverage = Math.round(region.ndviBase * 100);
     vegetationCoverage = Math.max(VALIDATION_RULES.NDVI_MIN, Math.min(VALIDATION_RULES.NDVI_MAX, vegetationCoverage));
 
-    let risk: 'Baixo' | 'Médio' | 'Alto' | 'Crítico' = 'Baixo';
-    if (localTemp >= 41) risk = 'Crítico';
-    else if (localTemp >= 36) risk = 'Alto';
-    else if (localTemp >= 31) risk = 'Médio';
-
-    const recommendations = {
-      'Crítico': "Emergência Térmica: Proibição de novos desmatamentos e plantio imediato de cinturões verdes.",
-      'Alto': "Arborização Prioritária: Implementar pavimentos claros (Albedo Alto) e corredores ecológicos.",
-      'Médio': "Monitoramento: Manutenção de parques e incentivo a telhados verdes.",
-      'Baixo': "Preservação: Área de resiliência. Manter densidade de biomassa atual."
-    };
+    const risk = calculateRiskLevel(localTemp);
+    const recommendation = getRiskRecommendation(risk);
 
     return {
       id: region.id,
@@ -107,7 +99,7 @@ export const fetchNasaHeatData = async (): Promise<RegionRisk[]> => {
       riskLevel: risk,
       temperature: localTemp,
       vegetationCoverage: vegetationCoverage,
-      recommendation: recommendations[risk],
+      recommendation: recommendation,
       populationDensity: region.density,
       totalPopulation: region.pop,
       x: region.x,

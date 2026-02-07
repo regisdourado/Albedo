@@ -1,5 +1,6 @@
 import React from 'react';
 import { Briefcase, Zap, Building2, ShoppingBag, Target, ArrowRight, GraduationCap, CheckCircle2, TrendingUp, Presentation } from 'lucide-react';
+import Badge from './common/Badge';
 
 const StrategicPlan: React.FC = () => {
   const sectors = [
@@ -51,9 +52,9 @@ const StrategicPlan: React.FC = () => {
       <div className="relative bg-slate-800/50 border border-slate-700 rounded-[40px] p-8 md:p-16 overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-orange-600/10 to-transparent pointer-events-none"></div>
         <div className="relative z-10 max-w-3xl space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-bold uppercase tracking-widest">
+          <Badge variant="blue">
             Visão de Mercado 2026
-          </div>
+          </Badge>
           <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
             Do Acadêmico ao <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Impacto Mensurável</span>

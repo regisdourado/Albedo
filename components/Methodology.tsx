@@ -1,5 +1,7 @@
 import React from 'react';
 import { Database, Satellite, Cpu, FileCheck, ExternalLink } from 'lucide-react';
+import Card from './common/Card';
+import IconWrapper from './common/IconWrapper';
 
 const Methodology: React.FC = () => {
   const steps = [
@@ -55,15 +57,15 @@ const Methodology: React.FC = () => {
         {/* Steps Grid */}
         <div className="grid md:grid-cols-2 gap-6">
           {steps.map((step, index) => (
-            <div key={index} className="bg-slate-800/50 p-8 rounded-2xl border border-slate-700 hover:border-orange-500/30 transition-all hover:bg-slate-800">
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-${step.color}-500/10 text-${step.color}-400`}>
+            <Card key={index} hover variant="default" padding="lg">
+              <IconWrapper variant={step.color as any} size="lg">
                 {step.icon}
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-100">{step.title}</h3>
+              </IconWrapper>
+              <h3 className="text-2xl font-bold mb-4 text-slate-100 mt-6">{step.title}</h3>
               <p className="text-slate-400 leading-relaxed">
                 {step.description}
               </p>
-            </div>
+            </Card>
           ))}
         </div>
 

@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, ScatterChart, Scatter, ZAxis, Cell } from 'recharts';
 import { ThermalDataPoint, RegionRisk } from '../types';
 import { fetchNasaHeatData } from '../services/arcgis';
+import { getRiskColorHex } from '../utils/riskUtils';
 import { AlertCircle, Thermometer, Map as MapIcon, BarChart3, Filter, Loader2, Navigation, MapPin, X, Globe, Share2, Check, Users, Activity, TrendingUp, ExternalLink, Maximize2, Layers, Search, Info, Plus, Minus, Compass, Eye, EyeOff, Map as MapAlt, ShieldCheck, Waves } from 'lucide-react';
 
 const mockHistoricalData: ThermalDataPoint[] = [
@@ -69,15 +70,7 @@ const Dashboard: React.FC = () => {
     initializeData();
   }, [geoScale]);
 
-  const getRiskColorHex = (level: string) => {
-    switch (level) {
-      case 'Crítico': return '#ef4444';
-      case 'Alto': return '#f97316';
-      case 'Médio': return '#eab308';
-      case 'Baixo': return '#22c55e';
-      default: return '#94a3b8';
-    }
-  };
+
 
   const getScaleLabel = () => {
     switch(geoScale) {

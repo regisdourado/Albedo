@@ -1,6 +1,7 @@
 import React from 'react';
 import { Map, BarChart3, BookOpen, ThermometerSun, Users, HeartHandshake, Rocket } from 'lucide-react';
 import { Section } from '../types';
+import UFMTLogo from './common/UFMTLogo';
 
 interface HeaderProps {
   activeSection: Section;
@@ -21,19 +22,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
     <header className="fixed top-0 w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 transition-all duration-300">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-4">
-            <a 
-              href="https://setec.ufmt.br/ava/bct-ead/login/index.php" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:scale-105 transition-transform duration-200"
-              title="Acessar AVA UFMT"
-            >
-              <img 
-                src="https://setec.ufmt.br/ava/bct-ead/pluginfile.php/1/theme_moove/logo/1769526764/logo-masters%20%281%29.png" 
-                alt="Logo UFMT BCT Masters" 
-                className="h-10 w-auto bg-slate-100 rounded-lg p-1 shadow-sm border border-slate-600"
-              />
-            </a>
+            <UFMTLogo variant="header" />
             <div className="h-8 w-px bg-slate-700 hidden sm:block"></div>
             <div 
               className="flex items-center space-x-2 cursor-pointer group" 
