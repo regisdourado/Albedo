@@ -2,6 +2,8 @@ import React from 'react';
 import { HeartPulse, Sprout, ShieldAlert, Users2, CloudRain, Sun, Info } from 'lucide-react';
 import Badge from './common/Badge';
 import InfoCard from './common/InfoCard';
+import PrimaryButton from './common/PrimaryButton';
+import StatBox from './common/StatBox';
 
 const SocioEnvironmental: React.FC = () => {
   const themes = [
@@ -85,22 +87,20 @@ const SocioEnvironmental: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-               <div className="bg-slate-800/50 p-4 rounded-2xl border border-slate-700">
-                  <div className="flex items-center gap-2 text-orange-400 mb-2">
-                    <Sun size={18} />
-                    <span className="text-xs font-bold uppercase">Meta 2030</span>
-                  </div>
-                  <p className="text-xl font-bold text-white">-3°C</p>
-                  <p className="text-[10px] text-slate-500">Redução almejada em ilhas de calor</p>
-               </div>
-               <div className="bg-slate-800/50 p-4 rounded-2xl border border-slate-700">
-                  <div className="flex items-center gap-2 text-blue-400 mb-2">
-                    <CloudRain size={18} />
-                    <span className="text-xs font-bold uppercase">Retenção</span>
-                  </div>
-                  <p className="text-xl font-bold text-white">+40%</p>
-                  <p className="text-[10px] text-slate-500">Aumento da umidade relativa local</p>
-               </div>
+               <StatBox
+                 icon={<Sun size={18} />}
+                 label="Meta 2030"
+                 value="-3°C"
+                 description="Redução almejada em ilhas de calor"
+                 iconColor="text-orange-400"
+               />
+               <StatBox
+                 icon={<CloudRain size={18} />}
+                 label="Retenção"
+                 value="+40%"
+                 description="Aumento da umidade relativa local"
+                 iconColor="text-blue-400"
+               />
             </div>
           </div>
 
@@ -154,9 +154,9 @@ const SocioEnvironmental: React.FC = () => {
                </div>
             </div>
             <p className="text-slate-400 font-medium">Junte-se à nossa rede de monitoramento e defesa térmica de Cuiabá.</p>
-            <button className="px-10 py-4 bg-white text-slate-900 font-bold rounded-2xl hover:bg-orange-500 hover:text-white transition-all transform hover:scale-105 shadow-xl">
+            <PrimaryButton variant="solid">
                Baixar Relatório Completo
-            </button>
+            </PrimaryButton>
          </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Briefcase, Zap, Building2, ShoppingBag, Target, ArrowRight, GraduationCap, CheckCircle2, TrendingUp, Presentation } from 'lucide-react';
 import Badge from './common/Badge';
+import PrimaryButton from './common/PrimaryButton';
 
 const StrategicPlan: React.FC = () => {
   const sectors = [
@@ -154,10 +155,9 @@ const StrategicPlan: React.FC = () => {
             A grande inovação não está apenas no mapeamento, mas na <strong>engenharia institucional</strong> que une a UFMT, o cooperativismo e as grandes corporações da região para um 2026 resiliente.
           </p>
         </div>
-        <button className="inline-flex items-center gap-3 px-10 py-4 bg-gradient-to-r from-orange-600 to-red-600 text-white font-bold rounded-2xl hover:scale-105 transition-all shadow-[0_0_40px_-10px_rgba(234,88,12,0.4)] group">
+        <PrimaryButton variant="gradient" icon={<ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />}>
            Solicitar Apresentação Executiva 2026
-           <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-        </button>
+        </PrimaryButton>
       </div>
     </div>
   );
