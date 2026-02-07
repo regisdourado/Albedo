@@ -9,6 +9,9 @@
 [![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.2-blue.svg)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.0-purple.svg)](https://vitejs.dev/)
+[![Deploy](https://img.shields.io/badge/Deploy-GitHub%20Pages-success.svg)](https://regisdourado.github.io/Albedo/)
+
+**🌐 [Acesse o aplicativo online](https://regisdourado.github.io/Albedo/)**
 
 </div>
 
@@ -97,6 +100,21 @@
 ```bash
 npm run build
 npm run preview
+```
+
+### Deploy no GitHub Pages
+
+Este projeto está configurado para deploy automático no GitHub Pages. Quando você faz push para a branch `main`, o GitHub Actions automaticamente:
+1. Instala as dependências
+2. Faz o build do projeto
+3. Publica no GitHub Pages
+
+**URL do aplicativo**: https://regisdourado.github.io/Albedo/
+
+Para fazer deploy manualmente:
+```bash
+npm run deploy
+git push origin main
 ```
 
 ---

@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Crucial para o GitHub Pages (caminhos relativos)
+  base: '/Albedo/', // Base path for GitHub Pages deployment
   build: {
     outDir: 'dist',
   }

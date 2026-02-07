@@ -24,7 +24,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && echo 'Build completed. Push to main branch to deploy to GitHub Pages.'"
   },
   "dependencies": {
     "react": "^18.2.0",
