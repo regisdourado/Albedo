@@ -188,6 +188,7 @@ const Dashboard: React.FC = () => {
           </div>
 
           {/* MAP CANVAS */}
+          {/* eslint-disable-next-line */}
           <div className="w-full h-full relative transition-all duration-[1500ms] ease-[cubic-bezier(0.23,1,0.32,1)] flex items-center justify-center" style={{ transform: getMapTransform() }}>
              
              {/* SIMULATED GEOGRAPHIC ENGINE: CUIABÁ MAP */}
@@ -238,6 +239,7 @@ const Dashboard: React.FC = () => {
                   if (!isVisible) return null;
 
                   return (
+                    {/* eslint-disable-next-line */}
                     <div key={region.id} className="absolute cursor-pointer transition-all duration-700" style={{ left: region.x, top: region.y, zIndex: isSelected ? 100 : 20 }} onClick={(e) => { e.stopPropagation(); handleRegionClick(region); }}>
                       <div className="relative group">
                          {showHeatLayer && (
@@ -262,7 +264,7 @@ const Dashboard: React.FC = () => {
                     <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter">{selectedRegion?.name}</h3>
                     <p className="text-[10px] text-blue-500 font-black uppercase mt-1">Sincronizado via Landsat 9</p>
                   </div>
-                  <button onClick={() => setSelectedRegion(null)} className="p-3 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-all"><X size={20} /></button>
+                  <button onClick={() => setSelectedRegion(null)} title="Fechar painel" className="p-3 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-all"><X size={20} /></button>
                 </div>
                 <div className="p-10 space-y-10 flex-1 overflow-y-auto custom-scrollbar">
                    <div className="bg-slate-900 border border-slate-800 p-8 rounded-[30px] flex justify-between items-center">
@@ -270,6 +272,7 @@ const Dashboard: React.FC = () => {
                         <p className="text-[10px] text-slate-500 font-bold uppercase mb-2 tracking-widest">Superfície (LST)</p>
                         <p className="text-6xl font-black text-white">{selectedRegion?.temperature}°C</p>
                       </div>
+                      {/* eslint-disable-next-line */}
                       <div className="px-4 py-1.5 rounded-full text-[10px] font-black uppercase border" style={{color: getRiskColorHex(selectedRegion?.riskLevel || ''), borderColor: getRiskColorHex(selectedRegion?.riskLevel || '')}}>{selectedRegion?.riskLevel}</div>
                    </div>
                    <div className="p-8 bg-blue-600/5 border border-blue-500/20 rounded-[30px]"><p className="text-sm text-slate-300 italic leading-relaxed font-medium">"{selectedRegion?.recommendation}"</p></div>

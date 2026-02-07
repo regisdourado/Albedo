@@ -60,6 +60,7 @@ const Header: React.FC<HeaderProps> = ({ activeSection, onNavigate }) => {
              <button 
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
+                title={item.label}
                 className={`p-2 rounded-lg ${activeSection === item.id ? 'bg-orange-600 text-white' : 'text-slate-400'}`}
              >
                 <item.icon size={20} />
